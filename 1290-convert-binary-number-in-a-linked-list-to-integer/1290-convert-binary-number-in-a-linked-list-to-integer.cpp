@@ -12,18 +12,14 @@ class Solution {
 public:
     int getDecimalValue(ListNode* head) {
         
-        string s="";
-        while(head!=NULL){
-                s+=head->val+'0';  
-                head=head->next;
-        }
-        reverse(s.begin(),s.end());
-      
+    
         int ans=0;
-        for(int i=0;i<s.length();i++){
-                
-                    ans+=(s[i]-'0')*pow(2,i);
+        while(head!=NULL){
             
+                ans<<=1;
+                ans|=head->val;
+                head=head->next;
+                    
         }
         
         return ans;
