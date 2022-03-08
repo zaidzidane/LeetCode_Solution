@@ -7,10 +7,10 @@ public:
             int min_=INT_MAX;
             int min_index=-1;
             
-            sort(salary.begin(),salary.end());
+            //sort(salary.begin(),salary.end());
             
             for(int i=0;i<salary.size();i++){
-                    if(salary[i]<=min_){
+                    if(salary[i]<min_){
                             min_=salary[i];
                             min_index=i;
                     }
@@ -21,15 +21,16 @@ public:
             }
         
             double sum=0;
-            for(int i=min_index+1;i<max_index;i++){
-                
-                      
-                        sum+=salary[i];
+            for(int i=0;i<salary.size();i++){
+                    
+                        if(i!=min_index and i!=max_index)
+                                sum+=salary[i];
             }
         
-      
+        
+            cout<<sum;
             
-            return sum/(max_index-min_index-1);
+            return sum/(salary.size()-2);
         
     }   
 };
