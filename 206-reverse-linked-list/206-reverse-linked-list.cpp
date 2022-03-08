@@ -11,24 +11,23 @@
 class Solution {
 public:
     
-    ListNode* top=NULL;
-    void reverse(ListNode* first,ListNode* second)
-    {
+    ListNode* h=NULL;
+    ListNode* dfs(ListNode* curr){
             
-            if(second==NULL){
-                        top=first;
-                        return;
-            }
-            else{
-                
-                    reverse(second,second->next);
-                    second->next=first;
-                    //cout<<second->val<<"\t"<<first->val<<endl;
+            cout<<curr->val;
+            if(curr->next==NULL){
+                    h=curr;
+                    return curr;
             }
         
-        
-    }    
-    
+                ListNode* p=dfs(curr->next);
+                curr->next->next=curr;
+                curr->next=NULL;
+                return p;
+
+            
+          
+    }
     
     
     ListNode* reverseList(ListNode* head) {
@@ -36,8 +35,8 @@ public:
             if(head==NULL){
                     return NULL;
             }
-            reverse(head,head->next);
+            dfs(head);
             head->next=NULL;
-            return top;
+            return h;
     }
 };
