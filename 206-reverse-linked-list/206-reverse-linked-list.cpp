@@ -11,12 +11,12 @@
 class Solution {
 public:
     
-    ListNode* h=NULL;
+
     ListNode* dfs(ListNode* curr){
             
-            cout<<curr->val;
+        
             if(curr->next==NULL){
-                    h=curr;
+                   
                     return curr;
             }
         
