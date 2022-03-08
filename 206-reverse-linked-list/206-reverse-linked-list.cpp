@@ -35,8 +35,7 @@ public:
             if(head==NULL){
                     return NULL;
             }
-            dfs(head);
-            head->next=NULL;
-            return h;
+            return dfs(head);
+            
     }
 };
