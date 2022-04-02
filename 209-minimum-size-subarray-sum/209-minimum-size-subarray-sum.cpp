@@ -3,8 +3,9 @@ public:
     int minSubArrayLen(int target, vector<int>& nums) {
         
             int n=nums.size();
-            int total = accumulate(nums.begin(), nums.end(), total);
-            cout<<total;
+            int total = 0;
+            total=accumulate(nums.begin(), nums.end(), total);
+            //cout<<total;
             if(total<target){
                     return 0;
             }
