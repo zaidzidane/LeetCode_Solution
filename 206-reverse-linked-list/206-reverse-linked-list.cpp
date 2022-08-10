@@ -11,31 +11,28 @@
 class Solution {
 public:
     
-
-    ListNode* dfs(ListNode* curr){
-            
+    ListNode* reverse(ListNode* child,ListNode* parent){
         
-            if(curr->next==NULL){
-                   
-                    return curr;
+    
+            if(child==NULL){
+                    
+                        return parent;
             }
         
-                ListNode* p=dfs(curr->next);
-                curr->next->next=curr;
-                curr->next=NULL;
-                return p;
-
             
-          
+            ListNode* temp =child->next;
+            child->next=parent;
+            return(reverse(temp,child));        
+        
+        
     }
     
     
+    
     ListNode* reverseList(ListNode* head) {
-            
-            if(head==NULL){
-                    return NULL;
-            }
-            return dfs(head);
-            
+    
+               return reverse(head,NULL);
+        
+        
     }
 };
