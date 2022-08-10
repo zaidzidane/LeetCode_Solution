@@ -2,30 +2,36 @@ class Solution {
 public:
     int majorityElement(vector<int>& nums) {
         
-            int cnt=1;
-            int val=nums[0];
-        
-            for(int i=1;i<nums.size();i++){
+                unordered_map<int,int>gzip;
+                
+                for(int i=0;i<nums.size();i++){
                     
-                    if(nums[i]==val){
-                            
-                            cnt++;
-                    }
-                    else{
-                            
-                            cnt--;
-                            if(cnt==0){
-                                    val=nums[i];   
-                                    cnt++;
-                                
-                            }
-                            
-                    }
-                
-                
-            }
+                                if(gzip.count(nums[i])==0){
+                                        
+                                            gzip[nums[i]]=1;
+                                        
+                                }
+                                else{
+                                        
+                                    
+                                                gzip[nums[i]]+=1;
+                                }
+                    
+                    
+                }
         
-            return val;
+        
+                int cnt=ceil(nums.size()/2.0);
+                for(auto g:gzip){
+                    
+                            if(g.second>=cnt){
+                                    
+                                        return g.first;
+                            }
+                    
+                }
+        
+                return -1;
         
     }
 };
