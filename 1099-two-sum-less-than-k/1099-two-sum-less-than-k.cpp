@@ -11,12 +11,12 @@ public:
                 
             }
             
-            cout<<endl;
+           
             int i=0;
             int j=nums.size()-1;
             int closest=INT_MAX;
             while(i<j){
-                    cout<<i<<"\t"<<j<<endl;
+                   
                     if((k-(nums[i]+nums[j])>0) and k-(nums[i]+nums[j])<closest){
                             
                                 closest=k-(nums[i]+nums[j]);
@@ -39,7 +39,7 @@ public:
                 
             }
             
-            cout<<k-closest;
+         
         
             return (k-closest)<0?-1:k-closest;
         
