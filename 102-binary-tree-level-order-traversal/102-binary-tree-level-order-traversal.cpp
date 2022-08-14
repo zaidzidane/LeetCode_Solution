@@ -26,10 +26,9 @@ public:
             while(!q.empty()){
                         TreeNode* temp=q.front();
                         q.pop();
-                        cout<<"here";
-                        
+                                                
                         if(temp==NULL){
-                                cout<<row.size()<<endl;
+                            
                                 ans.push_back(row);
                                 row.clear();
                                if(q.size()>0)
