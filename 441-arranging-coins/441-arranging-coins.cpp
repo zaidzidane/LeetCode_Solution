@@ -1,39 +1,33 @@
 class Solution {
 public:
-    
-
-    
     int arrangeCoins(int n) {
         
-
-        if(n>INT_MAX/8){
-            double k=1;
-            k*=n;
-            k*=8;
-        
-        
-        if(n==1)
-            return 1;
-        
-        n%=INT_MAX;
-       
-        long long int x1=(-1+sqrtl(1+(k)))/2;
-        long long int  x3=(-1-sqrtl(1+(k)))/2;
-        
-        return x1>0?x1:x3;
-    }
-    else{
-        
-         if(n==1)
-            return 1;
-        
-        n%=INT_MAX;
-       
-        int x1=(-1+sqrt(1+(8*n)))/2;
-        int  x3=(-1-sqrt(1+(8*n)))/2;
-        
-        return x1>0?x1:x3;
-        
-    }
+                int start=1;
+                int end=n;
+                
+                while(start<=end){
+                    
+                        long long int mid=start+(end-start)/2;
+                        
+                        if(mid*(mid+1)/2==n ){
+                            
+                                    return mid;
+                        }
+                    
+                        else if(mid*(mid+1)/2>n){
+                            
+                                    end=mid-1;
+                        }
+                    
+                        else{
+                                
+                                    start=mid+1;
+                            
+                                    
+                        }
+                }
+                
+                
+                return end;
     }
 };
