@@ -1,44 +1,59 @@
 class Solution {
 public:
     
+   
     
-  
-    int dfs(vector<vector<int>>&triangle,vector<vector<int>>&dp,int start,int index,int end){
-            
-            if(start>end){
-                    return 0;
-            }
-        
-            if(index<0 or index>end)
-                    return INT_MAX;
-        
-            else{
-                if(dp[start][index]!=INT_MAX){
-                        return dp[start][index];
-                }
-                
-                    int val1=dfs(triangle,dp,start+1,index,end);
-                    int val2=dfs(triangle,dp,start+1,index+1,end);
-                
-                
-                    //cout<<val1<<'\t'<<val2<<endl;
-                    dp[start][index]=min(val1,val2)+triangle[start][index];
-    
-            }
-        
-            return dp[start][index];
-                
-    }
     
     int minimumTotal(vector<vector<int>>& triangle) {
         
+           vector<vector<int>>df; 
+           df.push_back({triangle[0][0]});
+            for(int i=1;i<triangle.size();i++){
+                vector<int>row(triangle[i].size(),INT_MAX);
+                df.push_back(row);
+                for(int j=0;j<triangle[i].size();j++){
+                    
+                        cout<<i<<"\t"<<j<<endl;
+                                            
+                                    if(j!=0 and j!=triangle[i].size()-1)
+                                         df[i][j] = min(df[i-1][j],df[i-1][j-1])+triangle[i][j];
+                                    
+                                    else {
+                                        
+                                        if(j==0)
+                                            df[i][j]=df[i-1][j]+triangle[i][j];
+                                
+                                        if(j==triangle[i].size()-1){
+                                            
+                                        
+                                            df[i][j]=df[i-1][j-1]+triangle[i][j];
+                                           
+                                           
+                                        }
+                                            
+                                    }
+                                    
+                      
+                    
+                }
+                
+                
+            }
         
-        int start=0;
-        int end=triangle.size()-1;
-        int index=0;
-        int sum=0;
-        vector<vector<int>>dp(end+1,vector<int>(triangle[end].size(),INT_MAX));
-        return dfs(triangle,dp,start,index,end);
+            int minim=INT_MAX;
+            int k=0;
+            int last_row=triangle.size()-1;
+            while(k<df[last_row].size()){
+                  cout<<df[last_row][k]<<endl;
+                  minim=min(minim,df[last_row][k]);
+                  k++;
+                
+                
+            }
+            
+            return minim;
+            
+            
         
         
     }
