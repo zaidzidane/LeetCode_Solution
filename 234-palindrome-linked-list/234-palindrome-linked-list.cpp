@@ -10,20 +10,42 @@
  */
 class Solution {
 public:
-    bool isPalindrome(ListNode* head) {
+    
+    
+    void dfs(ListNode* head,string& val){
         
-            vector<int>ans;
-            while(head!=NULL){
-                    ans.push_back(head->val);
-                    head=head->next;
+            if(head==NULL){
+                    return;
             }
             
-            int n=ans.size();
-            for(int i=0;i<n/2;i++){
-                    if(ans[i]!=ans[n-1-i]){
-                            return false;
-                    }
+            else{
+                
+                    val+=to_string(head->val);
+                    dfs(head->next,val);
+                
             }
+       
+    } 
+    
+    
+    bool isPalindrome(ListNode* head) {
+        
+            string val="";
+            dfs(head,val);
+            
+            int i=0;
+            int j=val.length()-1;
+            while(i<j){
+                
+                    if(val[i]!=val[j])
+                            return false;
+                
+                    i++;
+                    j--;
+                
+            }
+        
             return true;
+        
     }
 };
