@@ -13,59 +13,58 @@ public:
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
         
         
-            int carry=0;
+            ListNode* temp1=l1;
+            ListNode* temp2=l2;
             ListNode* head=new ListNode();
-            ListNode* curr=head;
-            while(l1!=NULL and l2!=NULL){
+            ListNode* temp=head;
+            int carry=0;
+            
+        while(temp1!=NULL and temp2!=NULL){
                 
-                
-                        int val=l1->val+l2->val+carry;
-                        carry =val/10;
-                        val=val%10;
-                        curr->next=new ListNode(val);
-                        l1=l1->next;
-                        l2=l2->next;
-                        curr=curr->next;
-                        
-            }
-        
-        
-            if(l1!=NULL){
-                    while(l1!=NULL){
-                            int val=l1->val+carry;
-                            carry=val/10;
-                            val=val%10;
-                            curr->next=new ListNode(val);
-                            l1=l1->next;
-                            curr=curr->next;
-                    }
-                
-            }
-        
-        
-            if(l2!=NULL){
                     
-                    while(l2!=NULL){
-                            
-                            int val=l2->val+carry;
-                            carry=val/10;
-                            val=val%10;
-                            curr->next=new ListNode(val);
-                            l2=l2->next;
-                            curr=curr->next;
-                            
-                    }
-                
-            }
+                    int value=temp1->val+temp2->val+carry;
+                   
+                    temp->next=new ListNode(value%10);
+                    carry=(value)/10;
+                    temp=temp->next;
+                    temp1=temp1->next;
+                    temp2=temp2->next;
+            
+            
+        }
         
-            //cout<<carry<<endl;
-            if(carry==1){
+        if(temp1==NULL){
+            
+                while(temp2){
                     
-                    curr->next=new ListNode(carry);    
-                
-            }
+                    temp->next=new ListNode((temp2->val+carry)%10);
+                    carry=(temp2->val+carry)/10;
+                    temp=temp->next;
+                    temp2=temp2->next;
+                    
+                    
+                }
+            
+        }
         
-            return head->next;
+       if(temp2==NULL){
+            
+                while(temp1){
+                    
+                    temp->next=new ListNode((temp1->val+carry)%10);
+                    carry=(temp1->val+carry)/10;
+                    temp=temp->next;
+                    temp1=temp1->next;
+                    
+                }
+            
+        }
+        
+        if(carry)
+                temp->next=new ListNode(carry);
+        
+        
+        return head->next;
         
     }
 };
