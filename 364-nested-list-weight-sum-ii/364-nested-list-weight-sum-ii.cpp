@@ -27,63 +27,56 @@
  *     const vector<NestedInteger> &getList() const;
  * };
  */
-
-
 class Solution {
 public:
- 
-   int ans=0;
-    int max_=INT_MIN;
-    void dfs(vector<NestedInteger>&l,int depth){
-            if(l.size()==0){
-                 
-                     return;
+    
+    int maxdepth=1;
+    int sum=0;
+    void maxim(vector<NestedInteger>items,int depth){
+        
+            if(items.empty()){
+                
+                 maxdepth=max(maxdepth,depth-1);
+                return;
             }
-            else{ 
-                           max_=max(depth,max_);
-                        for(auto i:l){
-                            if(!i.isInteger()){
-                                dfs(i.getList(),depth+1);
-                            }    
-                        }   
-            }
+        
+            for(auto item:items){
+                    
+                     if(item.isInteger()){
+                        
+                            maxdepth=max(maxdepth,depth);
+                            
+                     }
+                    else
+                        maxim(item.getList(),depth+1);
+                }
          
     }
     
-    void bfs(vector<NestedInteger>&l,int depth,int max_depth){
-            if(l.size()==0){
-                     return ;
-            }
-            else{ 
-                        for(auto i:l){
-                            if(i.isInteger()){
-                                ans+=(max_depth-depth+1)*i.getInteger();
+    
+    void dfs(vector<NestedInteger> items,int depth){
+        
+                 for(auto item:items){
+                                  
+                        if(item.isInteger())
+                        
+                                sum+=(maxdepth-depth+1)*item.getInteger();
+                        else          
                                 
-                            }   
-                            else{
-                                
-                                bfs(i.getList(),depth+1,max_depth);
-                                
-                            }
-                        }   
-            }
-     
+                                dfs(item.getList(),depth+1);
+                     
+                 }
+        
     }
-    
-    
-    
     
     
     int depthSumInverse(vector<NestedInteger>& nestedList) {
         
-
-        int depth=1;
-        dfs(nestedList,depth);
-     
-        int level=1;
-        bfs(nestedList,level,max_);
-
-        return ans;
+       
+        maxim(nestedList,1);
+        dfs(nestedList,1);
+        cout<<maxdepth;
+        return sum;
         
     }
 };
