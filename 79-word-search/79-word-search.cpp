@@ -2,7 +2,7 @@ class Solution {
 public:
     
     
-   bool dfs(vector<vector<char>>&board,int i,int j,string word,int index){
+   bool dfs(vector<vector<char>>&board,int i,int j,string& word,int index){
        
             
             
