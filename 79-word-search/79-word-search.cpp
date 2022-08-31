@@ -10,7 +10,7 @@ public:
     return false;
 }
 
-bool dfs(vector<vector<char>>& board, int i, int j, string& word,int index) {
+bool dfs(vector<vector<char>>& board, int i, int j, string word,int index) {
     if (index>=word.size())
         return true;
     if (i<0 || i>=board.size() || j<0 || j>=board[0].size() || board[i][j] != word[index])  
