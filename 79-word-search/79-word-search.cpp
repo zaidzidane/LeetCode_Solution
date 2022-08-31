@@ -6,7 +6,7 @@ public:
        
             
             
-            char c;
+          
             if(index>=word.length()){
                 
                         return true;
@@ -18,14 +18,15 @@ public:
                         return false;
        
            
-            if(board[i][j]==word[index]){
-                        c=board[i][j];
+            
+                          
+                        char c=board[i][j];
                         board[i][j]='*';    
                         bool val= dfs(board,i+1,j,word,index+1)| dfs(board,i-1,j,word,index+1)| dfs(board,i,j+1,word,index+1)| dfs(board,i,j-1,word,index+1);
                         board[i][j]=c;
                         return val;
                 
-            }
+            
             
           
             return false;
