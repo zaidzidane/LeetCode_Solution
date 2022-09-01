@@ -2,24 +2,27 @@ class Solution {
 public:
     int shortestDistance(vector<string>& wordsDict, string word1, string word2) {
         
-        int k=0;
-        int j=0;
-        int min_=INT_MAX;
-        int flag1=0;
-        int flag2=0;
+        unordered_map<string,vector<int>>gzip;
         for(int i=0;i<wordsDict.size();i++){
-                if(wordsDict[i]==word1){
-                        k=i;
-                        flag1=1;
-                }
-                if(wordsDict[i]==word2){
-                        j=i;
-                        flag2=1;
-                }
-                if(flag1 and flag2){
-                        min_=min(min_,abs(k-j));
-                }
+            
+                    gzip[wordsDict[i]].push_back(i);          
+            
         }
-        return min_;
+        
+        int minim=INT_MAX;
+        for(int i=0;i<gzip[word1].size();i++){
+            
+            for(int j=0;j<gzip[word2].size();j++){
+                
+                    minim=min(minim,abs(gzip[word1][i]-gzip[word2][j]));
+                
+                
+            }
+            
+        }
+        
+        return minim;
+        
+        
     }
 };
