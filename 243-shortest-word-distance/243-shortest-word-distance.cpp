@@ -2,27 +2,36 @@ class Solution {
 public:
     int shortestDistance(vector<string>& wordsDict, string word1, string word2) {
         
-        unordered_map<string,vector<int>>gzip;
+        int i1=-1;
+        int i2=-1;
+        int max_distance=INT_MAX;
+        
         for(int i=0;i<wordsDict.size();i++){
             
-                    gzip[wordsDict[i]].push_back(i);          
+                
+                    if(wordsDict[i]==word1){
+                        
+                                i1=i;
+                                cout<<i;
+                            
+                    }
+                    if(wordsDict[i]==word2){
+                        
+                                i2=i;
+                                cout<<i;
+                        
+                    }
+            
+                    if(i1!=-1 and i2!=-1){
+                        
+                                max_distance=min(max_distance,abs(i1-i2));
+                        
+                        
+                    }
             
         }
         
-        int minim=INT_MAX;
-        for(int i=0;i<gzip[word1].size();i++){
-            
-            for(int j=0;j<gzip[word2].size();j++){
-                
-                    minim=min(minim,abs(gzip[word1][i]-gzip[word2][j]));
-                
-                
-            }
-            
-        }
-        
-        return minim;
-        
+        return max_distance;
         
     }
 };
