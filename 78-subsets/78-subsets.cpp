@@ -1,31 +1,33 @@
 class Solution {
 public:
     
-    vector<vector<int>>val;
-    void backtrack(vector<int>nums,vector<int>a,int start,int end){
+    vector<vector<int>>ans;
+    
+    
+    void backtrack(vector<int>&nums,vector<int>row,int start){
         
-            if(start==end){
-                    val.push_back(a);
-                    return;
-            }
-            else{
+                if(nums.size()<=start){ 
+                    
+                        ans.push_back(row);
+                        return;
+                }
+        
+               
+                backtrack(nums,row,start+1);
+                row.push_back(nums[start]);
+                backtrack(nums,row,start+1);
                 
-                    a.push_back(nums[start]);
-                    backtrack(nums,a,start+1,end);
-                    a.pop_back();
-                    backtrack(nums,a,start+1,end);
-                   
-                
-                
-            }
+            
     }
     
+    
+    
     vector<vector<int>> subsets(vector<int>& nums) {
-     
-            int start=0;
-            int end=nums.size();
-            vector<int>a;
-            backtrack(nums,a,start,end);   
-            return val;
+        
+        int start=0;
+        vector<int>row;
+        backtrack(nums,row,start);
+        return ans;
+        
     }
 };
