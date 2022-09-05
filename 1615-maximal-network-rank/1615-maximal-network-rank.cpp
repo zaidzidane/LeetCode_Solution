@@ -3,7 +3,7 @@ public:
     int maximalNetworkRank(int n, vector<vector<int>>& roads) {
         
         
-            vector<set<int>>v1(n);
+            vector<unordered_set<int>>v1(n);
         
             for(int i=0;i<roads.size();i++){
                 
