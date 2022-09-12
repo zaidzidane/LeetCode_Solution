@@ -2,24 +2,26 @@ class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
         
-                unordered_map<int,int>gzip;
             
-                for(int i=0;i<nums.size();i++){
-                    
-                        if(gzip.count(target-nums[i])!=0){
-                            
-                                    return {gzip[target-nums[i]],i};
+            unordered_map<int,int>gzip;
+            
+            for(int i=0;i<nums.size();i++){
+                
+                    if(gzip.find(target-nums[i])!=gzip.end()){
                                 
-                        }
-                        else{
+                                        return{gzip[target-nums[i]],i};
                             
+                    }
+                
+                    else{
+                        
                                     gzip[nums[i]]=i;
-                                    
-                        }
-                    
-                }
+                                
+                    }
+                
+            }
         
-                return{};
+            return {-1,-1};
         
     }
 };
