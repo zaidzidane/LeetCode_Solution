@@ -34,13 +34,6 @@ public:
                 
             }
         
-            for(int i=0;i<distance.size();i++){
-                for(int j=0;j<distance[0].size();j++){
-                            cout<<grid[i][j]<<"\t";
-                            
-                }
-                cout<<endl;
-            }
         
         
         
@@ -81,11 +74,10 @@ public:
             int minim=INT_MAX;
             for(int i=0;i<distance.size();i++){
                 for(int j=0;j<distance[0].size();j++){
-                            cout<<distance[i][j]<<"\t";
+                           
                             if(grid[i][j]==3)
                                     minim=min(minim,distance[i][j]);
                 }
-                cout<<endl;
             }
         
             return minim-1;
