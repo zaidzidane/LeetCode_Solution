@@ -1,34 +1,36 @@
 class Solution {
 public:
     bool isPalindrome(int x) {
-        
-        if(x<0){
-            return false;
-        }
-        if(x==0)
-            return true;
-        
-        vector<int>ans; 
-        int sign=x<0?-1:1;
-        while(x!=0){
-            ans.push_back(abs(x%10));
-            x/=10;
-        }
-        
-        int n=ans.size();
-        ans[n-1]*=sign;
-        
-        for( int i=0;i<n/2;i++){
-                cout<<ans[i]<<"\t"<<ans[n-1-i]<<endl;
-                if(ans[i]!=ans[n-1-i]){
-                        return false;
+            
+                if(x<0){
+                    return false;
                 }
-        
-            
-            
-        }
-        
-        return true;
-        
+                int cnt=0;
+                int temp=x;
+                vector<int>v;
+                int i=0;
+                while(temp){
+                    
+                    v.push_back(temp%10);
+                    temp/=10;
+                    
+                }
+          
+                // cout<<-121%10<<endl;
+                while(i<v.size()/2){
+                        cout<<v[i]<<"\t"<<v[v.size()-1-i]<<endl;
+                        if(v[i]==v[v.size()-1-i]){
+                                i+=1;
+                                continue;
+                        }
+                    
+                        else{
+                                return false;
+                        }
+                        
+                        
+                }
+                
+               return true;
     }
 };
