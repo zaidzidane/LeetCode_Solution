@@ -1,23 +1,25 @@
 class Solution {
 public:
     bool uniqueOccurrences(vector<int>& arr) {
+     
+           unordered_map<int,int>gzip;
         
-        unordered_map<int,int>gzip;
-        set<int>s1(arr.begin(),arr.end());
-        for(int i=0;i<arr.size();i++){
-                    gzip[arr[i]]+=1;
-        }
+            for(int item:arr){
+                
+                    gzip[item]+=1;
+                
+            }
         
+            set<int>s1;
+            set<int>s2;
         
-        set<int>s2;
-        for(auto itr:gzip){
-            
-                s2.insert(itr.second);
-            
-        }
+            for(auto item:gzip){
+                
+                    s1.insert(item.first);
+                    s2.insert(item.second);
+                
+            }
         
-        
-        return s1.size()==s2.size();
-        
+            return s1.size()==s2.size();
     }
 };
