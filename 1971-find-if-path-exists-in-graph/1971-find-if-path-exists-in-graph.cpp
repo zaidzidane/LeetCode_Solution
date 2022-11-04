@@ -1,44 +1,56 @@
-class Solution {
+    class Solution {
 public:
     
-    unordered_map<int,vector<int>>gzip;
-    void dfs(int source,int destination,vector<bool>&visited){
         
-            visited[source]=true;
-            
-            for(int nbrs:gzip[source]){
-                
-                        if(!visited[nbrs]){
-                            
-                                   
-                                    dfs(nbrs,destination,visited);
-                            
-                        }
-                
-            }
+    bool dfs(int source,int destination,vector<bool>&visited,vector<vector<int>>&nbrs){
+    
         
-            return;
+                if(visited[source]==true){
+                    
+                        return false;    
+                    
+                }
+                visited[source]=true;
+                // cout<<source<<endl;
+                if(source==destination){
+                        return true;
+                }
+                // cout<<nbrs[source].size()<<endl;
+                for(int i=0;i<nbrs[source].size();i++){
+                    
+                              if(dfs(nbrs[source][i],destination,visited,nbrs)){
+                                        return true;
+                              }
+                            else{
+                                
+                                        continue;    
+                                
+                            }
+                        
+                }
         
+        
+                return false;
         
     }
+        
     
     
     bool validPath(int n, vector<vector<int>>& edges, int source, int destination) {
         
-            if(source==destination){
-                    return true;
-            }
-        
-            for(auto item:edges){
-                    gzip[item[0]].push_back(item[1]);
-                    gzip[item[1]].push_back(item[0]);
-            }
-        
             vector<bool>visited(n,false);
+            vector<vector<int>>nbrs(n);    
         
-            dfs(source,destination,visited);
+            for(int i=0;i<edges.size();i++){
+                
+                           nbrs[edges[i][0]].push_back(edges[i][1]); 
+                            nbrs[edges[i][1]].push_back(edges[i][0]); 
+                    
+            }
+            
+            return dfs(source,destination,visited,nbrs);
+            
         
-            return visited[destination];
         
         
     }
