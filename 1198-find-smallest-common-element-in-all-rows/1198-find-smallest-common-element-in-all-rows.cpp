@@ -2,54 +2,40 @@ class Solution {
 public:
     int smallestCommonElement(vector<vector<int>>& mat) {
         
-            for(int i=0;i<mat[0].size();i++){
-                            
-                        int val=mat[0][i];
+        int n=mat.size();
+        int m=mat[0].size();
+        int cur_max=0;
+        int cnt=0;
+        vector<int>pos(n);
+        
+        for(int i=0;i<pos.size();i++){
+            
+                    cout<<pos[i]<<endl;
+        }
+        
+        while(true){
+                for(int i=0;i<n;i++){
+                    while(pos[i]<m and mat[i][pos[i]] < cur_max){
+                         ++pos[i];
+                    }
                     
-                        int j=1;
-                        while(j<mat.size())
-                        {
-                            int flag=0;
-                            int start=0;
-                            int end=mat[0].size()-1;
-                            while(start<=end){
-
-                                    int mid=start+(end-start)/2;
-                                    if(mat[j][mid]==mat[0][i]){
-                                                flag=1;
-                                                break;
-                                        
-                                    }
-                                    else if(mat[j][mid]>mat[0][i]){
-                                        
-                                            end=mid-1;
-                                        
-                                    }
-                                    else{
-                                        
-                                            start=mid+1;
-                                    }
-                            }
-                            // cout<<start<<"\t"<<end<<"\t"<<flag<<"\t"<<val<<endl;
-                            if(flag==0){
-                                    
-                                    break;
-                            }
+                    if(pos[i]>=m){
+                        
+                            return -1;
+                    }
+                    
+                    if(cur_max!=mat[i][pos[i]]){
                             
-                            else{
-                                    j+=1;
-                                    flag=0;   
-                            }
+                            cnt=1;
+                            cur_max=mat[i][pos[i]];
+                    }else if(++cnt==n){
+                            
+                            return cur_max;
                         
                     }
-                
-                     if(j==mat.size())
-                            return mat[0][i];
-                     
-                            
-                        
-            }
+                }  
+        }
         
-            return -1;
+        return -1;
     }
 };
