@@ -24,7 +24,7 @@ public:
                 
                 while(start<=end){
                         int mid=start+(end-start)/2;
-                        cout<<i<<"\t"<<mid<<endl;
+                        //cout<<i<<"\t"<<mid<<endl;
                         if(binaryMatrix.get(i,mid)==1){
                                     end=mid-1;
                                     flag=1;
