@@ -1,47 +1,63 @@
+
+bool compare(vector<int>a,vector<int>b){
+    
+            if(a[0]<b[0]){
+                    return true;
+            }
+            else if(a[0]==b[0]){
+                
+                    return a[1]<b[1];
+            }
+            else{
+                
+                    return false;
+            }
+}
+
+
 class Solution {
+    
 public:
+    
     int findMinArrowShots(vector<vector<int>>& points) {
-            
-     sort(points.begin(),points.end());
-            
-    vector<vector<int>>ans;
         
-        for(int i=0;i<points.size();i++){
-            
-                if(!ans.size()){
+            sort(points.begin(),points.end());
+            vector<vector<int>>ans;
+        
+            int i=1;
+            ans.push_back(points[0]);
+        
+            while(i<points.size()){
+        
+                    vector<int>q=ans.back();
+                    if(points[i][0]<=q[1] and points[i][1]>=q[1]){
                         
-                        ans.push_back(points[i]);
-                }
-            
-                else{
-                    
-                        if(ans.back()[1]>=points[i][0] and ans.back()[1]<=points[i][1]){
-                            
-                                            int x=points[i][0];
-                                            int y=ans.back()[1];;
-                                            ans.pop_back();
-                                            ans.push_back({x,y});
-                            
-                        }
+                                vector<int>v({points[i][0],q[1]});
+                                ans.pop_back();
+                                ans.push_back(v);
                         
-                        else if( ans.back()[1]>points[i][1]){
-                    
-                                    ans.pop_back();
-                                    ans.push_back(points[i]);
-                                   
-                            
-                            
-                        }
-                        else
-                            
+                    }
+                    else if(points[i][1]<=q[1]){
+                        
+                               
+                                ans.pop_back();
                                 ans.push_back(points[i]);
-                    
-                }
+                        
+                    }
+                    else{
+                                ans.push_back(points[i]);
+                        
+                        
+                    }
+                
+                
+                    i+=1;
+            }
+        
             
-        }
+            return ans.size();
+            
         
         
-        return ans.size();
-            
     }
 };
