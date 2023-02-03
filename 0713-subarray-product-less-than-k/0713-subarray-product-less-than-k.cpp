@@ -11,7 +11,7 @@ public:
         int cnt=0;
         
         while(end<nums.size()){
-                cout<<end<<endl;
+                //cout<<end<<endl;
                 product*=nums[end];
                 while( start<=end and product>=k){
                     product/=nums[start++];
