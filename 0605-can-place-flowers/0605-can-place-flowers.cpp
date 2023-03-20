@@ -16,7 +16,7 @@ public:
         
             for(int i=0;i<flowerbed.size();i++){
                 
-                        cout<<n<<endl;
+                        //cout<<n<<endl;
                         if(n==0) return true;
                 
                         if(flowerbed[i]==0) {
