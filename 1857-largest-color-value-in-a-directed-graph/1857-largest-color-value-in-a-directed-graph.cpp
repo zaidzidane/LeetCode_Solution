@@ -1,46 +1,59 @@
 class Solution {
 public:
+    
+
+    
     int largestPathValue(string colors, vector<vector<int>>& edges) {
-        int n = colors.length();
-        vector<vector<int>> adj(n);
-        vector<int> indegree(n);
-
-        for (auto& edge : edges) {
-            adj[edge[0]].push_back(edge[1]);
-            indegree[edge[1]]++;
-        }
-
-        vector<vector<int>> count(n, vector<int>(26));
-        queue<int> q;
-
-        // Push all the nodes with indegree zero in the queue.
-        for (int i = 0; i < n; i++) {
-            if (indegree[i] == 0) {
-                q.push(i);
+    
+            int n=colors.size();
+            vector<int>outdegree(n,0);
+            queue<int>q;
+            vector<vector<int>>graph(n);
+            for(int i=0;i<edges.size();i++){
+                
+                graph[edges[i][1]].push_back(edges[i][0]);
+                outdegree[edges[i][0]]++;            
+                
             }
-        }
-
-        int answer = 0, nodesSeen = 0;
-        while (!q.empty()) {
-            int node = q.front();
-            q.pop();
-            answer = max(answer, ++count[node][colors[node] - 'a']);
-            nodesSeen++;
-
-            for (auto& neighbor : adj[node]) {
-                for (int i = 0; i < 26; i++) {
-                    // Try to update the frequency of colors for neighbor to include paths
-                    // that use node->neighbor edge.
-                    count[neighbor][i] = max(count[neighbor][i], count[node][i]);
-                }
-
-                indegree[neighbor]--;
-                if (indegree[neighbor] == 0) {
-                    q.push(neighbor);
-                }
+          
+            vector<vector<int>>count(n,vector<int>(26,0));
+            bool flag=false;
+            for(int i=0;i<outdegree.size();i++){
+                    if(outdegree[i]==0){
+                            q.push(i);  
+                            flag=true;
+                    }
             }
-        }
-
-        return nodesSeen < n ? -1 : answer;
+        
+            if(!flag) return -1;
+            unordered_map<char,int>gzip;
+            int answer=0;
+            int seen=0;
+            while(!q.empty()){
+                int temp=q.front();
+                q.pop();    
+                seen+=1;
+                answer=max(answer,++count[temp][colors[temp] -'a']);
+                //cout<<temp<<endl;
+               
+                for(auto item:graph[temp]){
+                        for(int i=0;i<26;i++){
+                            
+                                count[item][i]=max(count[item][i],count[temp][i]);
+                            
+                        }
+                        outdegree[item]--;
+                        if(outdegree[item]==0){
+                                q.push(item);
+                        }
+                    
+                }
+                
+            }
+        
+        
+            return seen<n?-1:answer;   
+               
+                
     }
 };
