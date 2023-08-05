@@ -2,62 +2,51 @@ class Solution {
 public:
     vector<string> letterCombinations(string digits) {
         
-            unordered_map<int,vector<char>>gzip;
-            gzip['2']={'a','b','c'};
-            gzip['3']={'d','e','f'};
-            gzip['4']={'g','h','i'};
-            gzip['5']={'j','k','l'};
-            gzip['6']={'m','n','o'};
-            gzip['7']={'p','q','r','s'};
-            gzip['8']={'t','u','v'};
-            gzip['9']={'w','x','y','z'};
-            if(!digits.size()) return {};
-
+            vector<vector<char>>phone{
+                {},
+                {'a','b','c'},
+                {'d','e','f'},
+                {'g','h','i'},
+                {'j','k','l'},
+                {'m','n','o'},
+                {'p','q','r','s'},
+                {'t','u','v'},
+                {'w','x','y','z'}
+            };
         
+            if(!digits.size()){
+                
+                    return {};
+            }
+            
             vector<string>ans;
-            int i=2;
+            for(int i=0;i<phone[digits[0]-'1'].size();i++){
+                    string str;
+                    str+=phone[digits[0]-'1'][i];
+                    ans.push_back(str);
+                    // cout<<i<<endl;
+            } 
         
-            if(digits.size()==1){
-                     for(int j=0;j<gzip[digits[0]].size();j++){  
-                                    string q="";
-                                    q+=gzip[digits[0]][j];
-                                    ans.push_back(q);   
-                        }
-            }
+            int i=1;
+            
+//             for(int i=0;i<ans.size();i++){
+//                     cout<<ans[i]<<endl;
+                
+//             }
         
-            for(int k=0;k<gzip[digits[0]].size();k++){
-                        for(int j=0;j<gzip[digits[1]].size();j++){  
-                                    string q="";
-                                    q+=gzip[digits[0]][k];
-                                    q+=gzip[digits[1]][j];
-                                  
-                                    ans.push_back(q);
-                                    
-                        }
-            }
-        
-          vector<string>interm=ans;
-           
             while(i<digits.size()){
-                   
-                    ans.clear();
-                    for(int k=0;k<interm.size();k++){
-                        for(int j=0;j<gzip[digits[i]].size();j++){
-                                        string q="";
-                                        q+=interm[k];
-                                        q+=gzip[digits[i]][j];
-                                        ans.push_back(q);
+                    
+                    vector<string>temp;
+                    for(int j=0;j<ans.size();j++){
+                        int val=digits[i]-'1';
+                        for(int k=0;k<phone[val].size();k++){
+                                       temp.push_back(ans[j]+phone[val][k]); 
                         }
                     }
-                
-                    interm=ans;
-                    
+                    ans=temp;
                     i+=1;
-                   
             }
         
-    return interm;
-        
-        
+            return ans;
     }
 };
