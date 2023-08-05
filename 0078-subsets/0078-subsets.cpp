@@ -2,31 +2,24 @@ class Solution {
 public:
     
     vector<vector<int>>ans;
-    
-    void dfs(vector<int>&nums,int i,vector<int>arr){
+    void allsubs(vector<int>current,vector<int>&nums,int i){
         
             if(i==nums.size()){
-                    return;
+                    ans.push_back(current);
+                
             }
-            
-        
-            arr.push_back(nums[i]);
-            ans.push_back(arr);
-            dfs(nums,i+1,arr);
-            arr.pop_back();
-            dfs(nums,i+1,arr);
-        
+            else{
+                current.push_back(nums[i]);
+                allsubs(current,nums,i+1);
+                current.pop_back();
+                allsubs(current,nums,i+1);
+            }
         
     }
     
-    
-    
     vector<vector<int>> subsets(vector<int>& nums) {
-        
-        
-        vector<int>arr;
-        ans.push_back(arr);
-        dfs(nums,0,arr);
+        vector<int>temp;
+        allsubs(temp,nums,0);
         return ans;
         
     }
