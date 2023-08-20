@@ -2,35 +2,39 @@ class Solution {
 public:
     bool isValid(string s) {
         
-            stack<char>s1;
-            for(auto item:s){
+        stack<int>stk;
+        for(int i=0;i<s.size();i++){
+            
+                if(stk.size()==0 and (s[i]==')' or s[i]==']' or s[i]=='}')){
+                        return false;
+                }
+                else if(s[i]=='(' or s[i]=='[' or s[i]=='{'){
+                        stk.push(s[i]);
+                }
                 
-                    if((item==')' or item==']' or item=='}') and s1.empty()){
-                               return false;
-                    }
-                
-                    if(item=='(' or item=='[' or item=='{'){
-                               s1.push(item);
-                    }
-                    
-                    else if(item==')' and s1.top()=='('){
-                                s1.pop();
-                    }
-                
-                    else if(item==']' and s1.top()=='['){
-                                s1.pop();
-                    }
-                
-                    else if(item=='}' and s1.top()=='{'){
-                                s1.pop();
-                    }
-                
-                    else
+                else if(s[i]==')' and stk.top()=='('){
+                        stk.pop();    
+                }
+            
+                else if(s[i]==']' and stk.top()=='['){
+                        stk.pop();    
+                }
+            
+                else if(s[i]=='}' and stk.top()=='{'){
+                        stk.pop();    
+                }
+            
+                else{
+                            // cout<<s[i]<<endl;
                             return false;
-                
-            }
+                    
+                }    
+            
+        }
         
-            return s1.empty();
+        return stk.size()==0;
+        
+        
         
     }
 };
