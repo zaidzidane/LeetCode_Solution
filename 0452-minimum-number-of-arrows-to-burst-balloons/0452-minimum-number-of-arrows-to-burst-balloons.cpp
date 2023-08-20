@@ -1,63 +1,36 @@
-
-bool compare(vector<int>a,vector<int>b){
-    
-            if(a[0]<b[0]){
-                    return true;
-            }
-            else if(a[0]==b[0]){
-                
-                    return a[1]<b[1];
-            }
-            else{
-                
-                    return false;
-            }
+bool compare(vector<int>v1,vector<int>v2){
+            return v1[0]<v2[0]?true:(v1[0]==v2[0]?(v1[1]<v2[1]?true:false):false);
 }
 
 
 class Solution {
-    
 public:
-    
     int findMinArrowShots(vector<vector<int>>& points) {
         
-            sort(points.begin(),points.end());
+            sort(points.begin(),points.end(),compare);
             vector<vector<int>>ans;
-        
-            int i=1;
-            ans.push_back(points[0]);
-        
-            while(i<points.size()){
-        
-                    vector<int>q=ans.back();
-                    if(points[i][0]<=q[1] and points[i][1]>=q[1]){
-                        
-                                vector<int>v({points[i][0],q[1]});
-                                ans.pop_back();
-                                ans.push_back(v);
-                        
-                    }
-                    else if(points[i][1]<=q[1]){
-                        
-                               
-                                ans.pop_back();
-                                ans.push_back(points[i]);
-                        
+            //ans.push_back(points[0]);
+            for(int i=0;i<points.size();i++){
+                    if(ans.size()!=0 and points[i][0]<=ans.back()[1]){
+                                if(points[i][1]>ans.back()[1]){
+                                    int temp=ans.back()[1];
+                                    ans.pop_back();
+                                    ans.push_back({points[i][0],temp});
+                                }
+                                else{
+                                        ans.pop_back();
+                                        ans.push_back({points[i]});
+                                }
                     }
                     else{
+                        
                                 ans.push_back(points[i]);
                         
-                        
                     }
-                
-                
-                    i+=1;
+                    
             }
         
-            
-            return ans.size();
-            
-        
-        
-    }
+                return ans.size();
+        }
+    
 };
