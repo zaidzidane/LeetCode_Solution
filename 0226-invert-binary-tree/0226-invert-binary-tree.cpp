@@ -11,35 +11,23 @@
  */
 class Solution {
 public:
-    
-    void dfs(TreeNode* root){
-        
-        if(root==NULL)
-                return;
-            
-        if(root->left and root->right){
-                swap(root->left,root->right);
-        }
-        else if(root->left and !root->right){
-               
-                root->right=root->left;
-                root->left=NULL;
-        }
-        else if(!root->left and root->right){
-                root->left=root->right;
-                root->right=NULL;
-        }
-        dfs(root->left);
-        dfs(root->right);
-        
-        
-        
-    }
-    
     TreeNode* invertTree(TreeNode* root) {
         
-            dfs(root);
+            if(root==NULL){
+                    return NULL;
+            }
+        
+            TreeNode* left=invertTree(root->left);
+            TreeNode* right=invertTree(root->right);
+            TreeNode* temp=left;
+            root->left=right;
+            root->right=temp;
+        
             return root;
+            
+        
+        
+        
         
     }
 };
