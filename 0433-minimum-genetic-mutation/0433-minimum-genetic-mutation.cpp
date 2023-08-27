@@ -16,7 +16,7 @@ public:
         visited.insert(startGene);
         while(!q.empty()){
                 pair<string,int>ans=q.front();
-                cout<<ans.first<<endl;
+                // cout<<ans.first<<endl;
                 if(ans.first==endGene)
                 {
                     return ans.second;
