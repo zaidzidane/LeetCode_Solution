@@ -1,83 +1,43 @@
 class Solution {
 public:
-    
-    
-    int find(vector<int>&root,vector<int>&rank,int x){
+    bool validTree(int n, vector<vector<int>>& edges) {
+        
+        if(edges.size()==0 and n==1){
+                return true;
+        }
+        vector<vector<int>>v(n);
+        for(int i=0;i<edges.size();i++){
+                v[edges[i][0]].push_back(edges[i][1]);
+                v[edges[i][1]].push_back(edges[i][0]);   
+        }  
+        vector<bool>visited(n,false);
+        queue<int>q;
+        q.push(0);
+        visited[0]=true;
+        vector<int>parent(n,-1);   
+        while(!q.empty()){
+                int temp=q.front();
+                q.pop();
+                for(auto item:v[temp]){
+                        if(item==parent[temp]){
+                                continue;
+                        }
+                        if(visited[item]){
+                                return false;
+                        }
+                        parent[item]=temp;
+                        visited[item]=true;
+                        q.push(item);
+                }
+        }
         
         
-        if(root[x]==x){
-            
-                return x;
+        for(int i=0;i<visited.size();i++){
+                cout<<i<<endl;
+                if(!visited[i]) return false;
             
         }
         
-        return root[x]=find(root,rank,root[x]);
-        
-    }
-    
-    
-    bool unionSet(vector<int>&root,vector<int>&rank,int x,int y){
-        
-    
-            int rootx=find(root,rank,x);
-            int rooty=find(root,rank,y);
-        
-        
-            if(rootx!=rooty){
-                
-                        if(rank[rootx]>=rank[rooty]){
-                                     rank[rootx]+=rank[rooty];   
-                                     root[rooty]=root[x];
-                        }        
-                        else{
-                                     rank[rooty]+=rank[rootx];
-                                     root[rootx]=rooty;  
-                        } 
-            }
-        
-            else{
-                        return false;
-            }
-        
-            return true;
-        
-    }
-    
-    
-    bool validTree(int n, vector<vector<int>>& edges) {
-   
-            vector<int>root(n,0);
-            vector<int>rank(n,1);
-        
-            for(int i=0;i<root.size();i++){
-                
-                        root[i]=i;
-                
-            }
-        
-            for(int i=0;i<edges.size();i++){
-                
-                
-                        if(unionSet(root,rank,edges[i][0],edges[i][1])){
-                            
-                                continue;
-                            
-                        }
-                        else{
-                            
-                                return false;
-                            
-                        }
-                
-                
-            }
-        
-            for(int i=0;i<root.size();i++){
-                    root[i]=find(root,rank,root[i]);
-            }
-            set<int>s(root.begin(),root.end());
-            return s.size()==1;
-        
-        
+        return true;
     }
 };
