@@ -2,37 +2,24 @@ class Solution {
 public:
     int maximalNetworkRank(int n, vector<vector<int>>& roads) {
         
+        vector<vector<int>>graph(n);
         
-            vector<unordered_set<int>>v1(n);
+        for(int i=0;i<roads.size();i++){
+                graph[roads[i][0]].push_back(roads[i][1]);
+                graph[roads[i][1]].push_back(roads[i][0]);
+        }
         
-            for(int i=0;i<roads.size();i++){
-                
-                        v1[roads[i][0]].insert(roads[i][1]);
-                        v1[roads[i][1]].insert(roads[i][0]);
-                
-            }
+        set<vector<int>>s(roads.begin(),roads.end());
         
-            int maxim=0;
-        
-            for(int i=0;i<v1.size();i++){
-                
-                for(int j=i+1;j<v1.size();j++){
-                            int val=v1[i].size()+v1[j].size();
-                            if(v1[i].find(j)!=v1[i].end())
-                                  maxim=max(maxim,val-1);
-                        
-                            else{
-                                
-                                  maxim=max(maxim,val);  
-                                
-                            }   
-                    
-                }
-                
-            }
-        
-        
-            return maxim;
+        int max_cnt=0;
+        for(int i=0;i<n;i++){
+            for(int j=i+1;j<n;j++){
+                    int cnt=graph[i].size() +graph[j].size();
+                    if(s.contains({i,j}) or s.contains({j,i})) cnt-=1;
+                    max_cnt=max(max_cnt,cnt);
+            }   
+        }
+        return max_cnt;
         
     }
 };
