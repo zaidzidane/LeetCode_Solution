@@ -1,80 +1,46 @@
 class Solution {
 public:
     
+    
     int find(int x,vector<int>&parent){
-        
-            if(x==parent[x]){
-                
-                    return x;      
-                
+            while(x==parent[x]){
+                    return x;
             }
-        
             return parent[x]=find(parent[x],parent);
-        
     }
     
-    
-    void setunion(int x,int y,vector<int>&parent){
-            
-            
-            int parent_x=find(x,parent);
-            int parent_y=find(y,parent);
+    void unionset(int x,int y,vector<int>&parent){
         
-            if(parent_x!=parent_y){
-                
-                        if(parent_x<=parent_y){
-                            
-                                        parent[parent_y]=parent_x; 
-                        }
-                        else{
-                            
-                            
-                                        parent[parent_x]=parent_y;
-                        }
+            int find_x=find(x,parent);
+            int find_y=find(y,parent);
+            
+            if(find_x<find_y){
+                    parent[find_y]=parent[find_x];
+            }    
+            else if(find_x>find_y){
+                    parent[find_x]=parent[find_y];
                 
             }
-            
-        
-        
-        
-        
     }
-    
-    
     
     string smallestEquivalentString(string s1, string s2, string baseStr) {
+            vector<int>parent(26,-1);
+            for(int i=0;i<26;i++){
+                    parent[i]=i;
+            }    
+            for(int i=0;i<s1.size();i++){
+                    unionset(s1[i]-'a',s2[i]-'a',parent);
+            }
+            string ans="";
         
         
-                vector<int>parent(26,0);
-                
-                for(int i=0;i<26;i++){
-                    
-                            parent[i]=i;
-                        
-                }
+            for(int i=0;i<baseStr.size();i++){
+                    ans+=find(baseStr[i]-'a',parent)+'a';
+            }
         
+            
+            return ans;
         
-                for(int i=0;i<s1.size();i++){
-                    
-                            setunion(s1[i]-'a',s2[i]-'a',parent);
-                    
-                }
-        
-//                  for(int i=0;i<26;i++){
-                    
-//                             char c='a'+i;
-//                             cout<<c<<"\t"<<parent[i]<<endl;
-                        
-//                 }
-                string ans="";
-                for(int i=0;i<baseStr.size();i++){
-                    
-                        int v=find(baseStr[i]-'a',parent);
-                        ans+='a'+v;
-                    
-                }
-                
-                return ans;
         
     }
 };
