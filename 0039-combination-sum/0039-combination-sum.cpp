@@ -1,41 +1,34 @@
 class Solution {
 public:
     
-    vector<vector<int>>ans;
-    void dfs(vector<int>&candidates,int target,int sum,int index,vector<int>arr){
+    
+    set<vector<int>>ans;
+    void backtrack(vector<int>&candidates,int idx,vector<int>total,int sum,int target){
+    
+        if(sum>target or idx>=candidates.size()){
+                return;
+        }                
+        if(sum==target){
+                ans.insert(total);
+                return;
+        }
         
-            
-                 // cout<<index<<"\t"<<sum<<endl;
-                if(sum>target or index>=candidates.size()){      
-                        return;
-                }
-        
-                if(sum==target){
-                        ans.push_back(arr);
-                        return;                
-                }
-        
-                sum+=candidates[index];
-                arr.push_back(candidates[index]);
-                dfs(candidates,target,sum,index,arr);
-                sum-=candidates[index];
-                arr.pop_back();
-                dfs(candidates,target,sum,index+1,arr);
-                
-        
-        
+        total.push_back(candidates[idx]);
+        backtrack(candidates,idx,total,sum+candidates[idx],target);
+        total.pop_back();
+        backtrack(candidates,idx+1,total,sum,target);
         
         
     }
     
-    
-    
     vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
         
-        vector<int>arr;
-        dfs(candidates,target,0,0,arr);
-        return ans;
+            vector<int>total;
+            int sum=0;
+            backtrack(candidates,0,total,sum,target);
         
+            vector<vector<int>>a(ans.begin(),ans.end());
+            return a;
         
     }
 };
