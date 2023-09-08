@@ -2,14 +2,14 @@ class Solution {
 public:
     
     
-    set<vector<int>>ans;
+    vector<vector<int>>ans;
     void backtrack(vector<int>&candidates,int idx,vector<int>total,int sum,int target){
     
         if(sum>target or idx>=candidates.size()){
                 return;
         }                
         if(sum==target){
-                ans.insert(total);
+                ans.push_back(total);
                 return;
         }
         
@@ -27,8 +27,8 @@ public:
             int sum=0;
             backtrack(candidates,0,total,sum,target);
         
-            vector<vector<int>>a(ans.begin(),ans.end());
-            return a;
+           // vector<vector<int>>a(ans.begin(),ans.end());
+            return ans;
         
     }
 };
