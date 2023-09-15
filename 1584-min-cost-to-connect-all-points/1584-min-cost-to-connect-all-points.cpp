@@ -1,52 +1,42 @@
 class Solution {
 public:
+    
+    int distance(vector<int>p1,vector<int>p2){
+            
+            return abs(p1[0]-p2[0])+abs(p1[1]-p2[1]);
+    }
+    
+    
     int minCostConnectPoints(vector<vector<int>>& points) {
         
             int n=points.size();
-            
-            vector<bool>visited(n,false);
             vector<vector<pair<int,int>>>v(n);
-        
-        
             for(int i=0;i<points.size();i++){
                 for(int j=i+1;j<points.size();j++){
-                        
-                        int val=abs(points[i][0]-points[j][0])+abs(points[i][1]-points[j][1]);
-                        v[i].push_back({val,j});
-                        v[j].push_back({val,i});
-                        
+                            int val=distance(points[i],points[j]);
+                            v[i].push_back({val,j});
+                            v[j].push_back({val,i});
                 }
-                
-            }
+            }     
         
-            // cout<<"yes"<<endl;
+            vector<bool>visited(n,false);
             priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>>pq;
-            int ans=0;
             pq.push({0,0});
+            int ans=0;
             while(!pq.empty()){
-                
-                        auto temp=pq.top();
-                        pq.pop();
-                        
-                        // cout<<temp.first<<"\t"<<temp.second<<endl;
-                        if(visited[temp.second]){
-                                
-                                    continue;
-                        }
-                
-                        ans+=temp.first;
-                        visited[temp.second]=true;
-                        for(auto item:v[temp.second]){
-                            
-                                    pq.push({item.first,item.second});
-                            
-                            
-                        }
-                
-                
+                auto temp=pq.top();
+                pq.pop();
+                if(visited[temp.second]){
+                        continue;   
+                }
+                ans+=temp.first;
+                visited[temp.second]=true;
+                for(auto node:v[temp.second]){
+                    pq.push({node.first,node.second});        
+                }      
             }
+             return ans;
+                   
         
-        
-            return ans;
     }
 };
