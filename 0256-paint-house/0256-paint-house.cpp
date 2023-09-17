@@ -6,35 +6,23 @@ public:
     
     int minCost(vector<vector<int>>& costs) {
         
-    
-         vector<vector<int>>dp(costs[0].size(),vector<int>(costs.size(),INT_MAX));
-         
-        
-         dp[0][0]=costs[0][0];
-         dp[1][0]=costs[0][1];
-         dp[2][0]=costs[0][2];
-        
-        
-       
-         for(int i=1;i<costs.size();i++){
-             
-                dp[0][i]=min(dp[1][i-1],dp[2][i-1])+costs[i][0];
-                dp[1][i]=min(dp[0][i-1],dp[2][i-1])+costs[i][1];
-                dp[2][i]=min(dp[0][i-1],dp[1][i-1])+costs[i][2];
-                
-         }
-        
-//         for(int i=0;i<costs.size();i++){
-//             for(int j=0;j<costs.size();j++){
-                    
-//                         cout<<dp[i][j]<<"\t";
-//             }
+            vector<vector<int>>dp(costs.size()+1,vector<int>(costs[0].size(),INT_MAX));
+            dp[0][0]=0;
+            dp[0][1]=0;
+            dp[0][2]=0;
+            int n=costs.size();
+            for(int i=1;i<=costs.size();i++){
+                for(int k=0;k<costs[0].size();k++){
+
+                    if(k==0)
+                    dp[i][0]=min(dp[i-1][1],dp[i-1][2])+costs[i-1][k];
+                    if(k==1)
+                    dp[i][1]=min(dp[i-1][0],dp[i-1][2])+costs[i-1][k];
+                    if(k==2)
+                    dp[i][2]=min(dp[i-1][0],dp[i-1][1])+costs[i-1][k];
+                }
+            }
             
-//                         cout<<endl;
-//         }
-       
-         return min({dp[0][costs.size()-1],dp[1][costs.size()-1],dp[2][costs.size()-1]});
-        
-        
+            return min(dp[n][0],min(dp[n][1],dp[n][2]));
     }
 };
