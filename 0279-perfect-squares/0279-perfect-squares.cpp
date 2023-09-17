@@ -46,7 +46,7 @@ public:
             for(int i=1;i<=n;i++){
                     if(perfect(i)){
                             elements.push_back(i);
-                            cout<<i<<endl;
+                            
                     }
             }
         
