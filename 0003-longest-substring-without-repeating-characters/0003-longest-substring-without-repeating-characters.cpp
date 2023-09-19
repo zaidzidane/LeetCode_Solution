@@ -2,30 +2,27 @@ class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
         
-        if(s.length()==0){
-                return 0;    
-        }
+            vector<int>v(128,0);
+            int i=0;
+            int j=0;
+            int max_len=0;
+            while(j<s.size()){
+                    if(v[s[j]-' ']==1){
+                          //cout<<i<<"\t"<<j-1<<endl;
+                          max_len=max(max_len,j-i); 
+                          v[s[i]-' ']-=1;
+                          i++;
+                          continue;
+                    }        
+                    v[s[j]-' ']=1;
+                    j++;   
+            }
         
-        unordered_map<char,int>gzip;
-        int max_len=0;
-        int len=0;
-        int c=0;
-        for(int i=0;i<s.length();i++){
-            
-                    if(gzip.find(s[i])!=gzip.end()){
-                        
-                                c=max(gzip[s[i]],c);
-                                
-                        
-                    }  
-            
-                    max_len=max(max_len,i-c+1);        
-                                
-                    gzip[s[i]]=i+1;
-            
-        }
         
+        max_len=max(max_len,j-i);   
+            
         return max_len;
+        
         
     }
 };
