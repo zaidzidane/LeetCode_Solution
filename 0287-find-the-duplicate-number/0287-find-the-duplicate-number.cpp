@@ -1,25 +1,22 @@
 class Solution {
 public:
+    
+    
     int findDuplicate(vector<int>& nums) {
         
-            for(int i=0;i<nums.size();i++){
-                    
-                    // cout<<nums[nums[i]]<<endl;
-                    if(nums[abs(nums[i])]>0){
-                            
-                            nums[abs(nums[i])]*=-1;    
-                        
-                    }
-                    else{
-                        
-                            return abs(nums[i]);
-                        
-                        
-                    }
-                        
-                
+        for(int i=0;i<nums.size();i++){
+            
+            int curr=abs(nums[i]);
+            if(nums[curr]<0){
+                    return curr;
             }
+            nums[curr]*=-1;
+            
+        }
         
-            return -1;
+        for (auto& num : nums)
+            cout<<num<<"\t";
+        
+        return -1;
     }
 };
