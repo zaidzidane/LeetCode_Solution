@@ -1,68 +1,62 @@
+int getfirst(vector<int>&nums,int target){
+    
+        int start=0;
+        int end=nums.size()-1;
+        
+        while(start<=end){
+                
+                int mid=start+(end-start)/2;
+                if(nums[mid]<target){
+                        start=mid+1;
+                }
+                else{
+                        end=mid-1;
+                }   
+        }
+            
+        if(start<nums.size() and nums[start]==target)
+            return start;
+    
+        return -1;
+}   
+
+
+
+int getend(vector<int>&nums,int target){
+    
+        int start=0;
+        int end=nums.size()-1;
+        while(start<=end){
+                
+                int mid=start+(end-start)/2;
+                if(nums[mid]<=target){
+                        start=mid+1;
+                }
+                else{
+                        end=mid-1;
+                }   
+        }
+            
+        if(end>=0 and nums[end]==target)
+            return end;
+    
+        return -1;
+}
+
+
+
+
+
+
+
 class Solution {
 public:
-    
-    int checkleft(vector<int>&nums,int target){
+    vector<int>searchRange(vector<int>& nums, int target) {
+                    if(nums.size()==0) return {-1,-1};
+                    int start=getfirst(nums,target);
+                    return {getfirst(nums,target),getend(nums,target)};
+        
+        }
         
     
-            int left=0;
-            int right=nums.size()-1;
-        
-            while(left<=right){
-                
-                        int mid=left+(right-left)/2;
-                        
-                        if(nums[mid]>=target){
-                                    right=mid-1;    
-                        }
-                        else{
-                                    left=mid+1;    
-                        }
-                        
-            }
-            
-            return left<nums.size() and nums[left]==target?left:-1;
-       
-    }
-    
-    
-        int checkright(vector<int>&nums,int target){
-        
-    
-            int left=0;
-            int right=nums.size()-1;
-        
-            while(left<=right){
-                
-                        int mid=left+(right-left)/2;
-                        
-                        if(nums[mid]>target){
-                                    right=mid-1;    
-                        }
-                        else{
-                                    left=mid+1;    
-                        }
-                        
-            }
-            
-            return right>=0 and nums[right]==target?right:-1;
-       
-    }
-    
-    
-    
-    
-    vector<int> searchRange(vector<int>& nums, int target) {
-        
-            if(nums.size()==0){
-                    return {-1,-1};
-            }
-        
-           int left=checkleft(nums,target);
-           int right=checkright(nums,target);
-        
-        
-          return {left,right};
-        
-        
-    }
 };
