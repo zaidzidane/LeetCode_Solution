@@ -1,24 +1,19 @@
 class Solution:
     def findSpecialInteger(self, arr: List[int]) -> int:
         
-            if len(arr)==1:
-                    return arr[0]
-            i=0
-            j=1
-        
-            while j<len(arr):
-                
-                    if arr[i]!=arr[j]:
-                        
-                        if (j-i)>(0.25)*len(arr):
-                                return arr[i]
-                        
-                        i=j
-                        
-                    j+=1
+            n=len(arr)
+            candidates=[arr[0],arr[n//4],arr[n//2],arr[3*n//4],arr[n-1]]
+            target=n//4
+            
+            for candidate in candidates:
                     
+                    left=bisect_left(arr,candidate,0,n)
+                    right=bisect_right(arr,candidate,0,n)
                     
-            return arr[i]          
+                    if (right-left)>target:
+                            return arr[left]
+                        
+            return -1
     
                         
                         
