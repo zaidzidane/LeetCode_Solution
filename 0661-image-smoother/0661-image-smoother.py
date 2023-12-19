@@ -18,7 +18,7 @@ class Solution:
                                 val+=img[m][n]
                                 cnt+=1
         
-                print(val,cnt)
+          
                 ans[i][j]=val//cnt
             
                                 
