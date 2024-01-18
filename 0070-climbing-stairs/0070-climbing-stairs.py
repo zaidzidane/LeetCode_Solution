@@ -1,26 +1,16 @@
 class Solution:
     
-    dicty={}
-    def stairs(self,n):
-        
-            if n==1:
-                return 1
-            
-            if n==2:
-                return 2
-            
-            if n in self.dicty:
-                return self.dicty[n]
-            
-            self.dicty[n]=self.stairs(n-1)+self.stairs(n-2)
-            return self.dicty[n]
-    
-    
-    
-    
-    
+    dicti={}
     def climbStairs(self, n: int) -> int:
         
-            return self.stairs(n)
-                
+        if(n==1):
+                return 1
+        if n==2:
+                return 2
         
+        if n in self.dicti:
+            return self.dicti[n]
+        
+        
+        self.dicti[n]=self.climbStairs(n-1)+self.climbStairs(n-2)
+        return self.dicti[n]
