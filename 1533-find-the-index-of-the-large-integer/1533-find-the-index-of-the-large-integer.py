@@ -26,7 +26,7 @@ class Solution:
                 mid=left+(right-left)//2
                 
                 if ((right-left)%2)!=0:
-                    print('no',left,mid,mid+1,right)
+                    # print('no',left,mid,mid+1,right)
                     val=reader.compareSub(left,mid,mid+1,right)
                     if val==0:
                             return mid
@@ -36,7 +36,7 @@ class Solution:
                             left=mid+1 
                             
                 else:
-                    print('yes',left,mid-1,mid+1,right)
+                    # print('yes',left,mid-1,mid+1,right)
                     val=reader.compareSub(left,mid-1,mid+1,right)
                     if val==0:
                             return mid
