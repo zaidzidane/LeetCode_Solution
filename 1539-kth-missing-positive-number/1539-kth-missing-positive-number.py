@@ -1,27 +1,26 @@
 class Solution:
+    
     def findKthPositive(self, arr: List[int], k: int) -> int:
-        
-            left=0
-            right=len(arr)-1
+    
+            start=0
+            end=len(arr)-1
+            while(start<end):
+                mid=(start+end)>>1
+                val=arr[mid]
+                if (val-mid)<=k:
+                    start=mid+1
+                else:
+                    end=mid
             
-            while(left<=right):
-                    
-                    mid=left+(right-left)//2
-                    print(mid)
-                    if (arr[mid]-mid-1<k):
-                            
-                        left=mid+1
-                        
-                        
-                    else:
-                        right=mid-1
-                        
-                
-                        
-            return left+k          
-                    
-
-                    
-                
-                
+           
+            if arr[start]-start-1<k:
+                cnt=(k-(arr[start]-start-1))
+                print(cnt)
+                return arr[start]+cnt
+            
+            print("here")
+            va=arr[start-1]-start
+            
+            return arr[start-1]+k-va
+            
             
