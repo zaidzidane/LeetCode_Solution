@@ -31,7 +31,6 @@ class WordDictionary:
                 return False
         
         if indx==len(word):
-            print(temp.flag)
             return temp.flag
         
         val=False
@@ -40,7 +39,7 @@ class WordDictionary:
                         if temp!=None:
                                 val |=self.dfs(item,word,indx+1)
         else:
-                print(word[indx])
+               
                 if temp.child[ord(word[indx])-97]==None:
                         return False
                     
