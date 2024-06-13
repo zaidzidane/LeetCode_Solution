@@ -1,24 +1,22 @@
 class Solution:
     
-    
     def searchInsert(self, nums: List[int], target: int) -> int:
         
+            left=0
+            right=len(nums)-1
             
-            start=0
-            end=len(nums)-1
-            while(start<end):
-                    mid=(start+end)>>1
-                    print(start,end,mid)
-                    if nums[mid]>=target:
-                        end=mid
-                    else:
-                        start=mid+1
+            while(left<=right):
+                
+                mid=left+(right-left)//2
+                    
+                if nums[mid]>=target:
+                        right=mid-1
+            
+                else:   
+                        left=mid+1
             
             
-            if end==len(nums)-1:
-                    if target>nums[end]:
-                            return end+1
-            return end
+            return left
                         
-                        
-            
+        
+        
