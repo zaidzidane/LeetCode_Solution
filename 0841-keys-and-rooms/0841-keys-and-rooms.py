@@ -1,30 +1,33 @@
 class Solution:
     
     
+    def __init__(self):
+        
+        self.visited=[]
+    
+    
+    
+    def helper(self,rooms,indx):
+        
+        if self.visited[indx]==True:
+                return
+            
+        self.visited[indx]=True
+        
+        for item in rooms[indx]:
+            
+            self.helper(rooms,item)
+        
+        
+    
+    
     def canVisitAllRooms(self, rooms: List[List[int]]) -> bool:
-        
-        
-        visited=[False]*len(rooms)
-        def dfs(idx,rooms,visited):
+    
             
-            visited[idx]=True
-            if len(rooms[idx])==0:
-                      return        
+            self.visited=[False for i in range(len(rooms))]
             
-            for item in rooms[idx]:
-                if visited[item]==False:
-                    visited[item]=True
-                    dfs(item,rooms,visited)
-                
-                
-        dfs(0,rooms,visited)
-                    
-           
-        print(visited)
-        return all(visited)            
+            
+            self.helper(rooms,0)
+            return all(self.visited)
         
-                    
-            
-        
-            
         
