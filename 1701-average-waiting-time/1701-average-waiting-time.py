@@ -14,5 +14,5 @@ class Solution:
                         ans+=customer[1]+start-customer[0]
                         start+=customer[1]
                     
-                    print(ans)
+                    
             return ans/len(customers)
