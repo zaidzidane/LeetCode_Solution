@@ -4,7 +4,7 @@ class Solution:
     def minMutation(self, startGene: str, endGene: str, bank: List[str]) -> int:
     
     
-            queue=[[startGene,0]]
+            queue=[(startGene,0)]
             seen={startGene}
             
             while(len(queue)):
@@ -16,7 +16,7 @@ class Solution:
                         if s  in bank and s not in seen:
                             if s==endGene:
                                     return dist+1
-                            queue.append([s,dist+1])
+                            queue.append((s,dist+1))
                             seen.add(s)
             
                 
