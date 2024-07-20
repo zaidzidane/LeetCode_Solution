@@ -10,7 +10,6 @@ class Solution:
             while(len(queue)):
                
                 temp,dist=queue.pop(0)
-                print(temp)
                 for char in "ACGT":
                     for i in range(len(temp)):
                         s = temp[:i]+char+temp[i+1:]
